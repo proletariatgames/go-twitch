@@ -9,7 +9,7 @@ func TestUsersUser(t *testing.T) {
 
 	tc := NewClient(&http.Client{})
 
-	_, err := tc.Users.User("test_user1")
+	_, err := tc.Users.User("22747064") // test_user1
 
 	if err != nil {
 		t.Errorf("error not nil: %+v", err)
@@ -26,7 +26,7 @@ func TestUsersFollows(t *testing.T) {
 		Offset: 0,
 	}
 
-	_, err := tc.Users.Follows("test_user1", opt)
+	_, err := tc.Users.Follows("22747064", opt)
 
 	if err != nil {
 		t.Errorf("error not nil: %+v", err)
@@ -38,7 +38,7 @@ func TestUsersFollow(t *testing.T) {
 
 	tc := NewClient(&http.Client{})
 
-	_, err := tc.Users.Follow("Roybot1911", "Dansgaming")
+	_, err := tc.Users.Follow("19407332", "7236692") // Roybot1911, DansGaming
 
 	if err != nil {
 		t.Errorf("error not nil: %+v", err)

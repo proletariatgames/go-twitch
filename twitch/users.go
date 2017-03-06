@@ -33,8 +33,8 @@ type UFollowS struct {
 }
 
 type UTargetS struct {
-	Channel   ChannelS `json:"channel,omitempty"`
-	CreatedAt string   `json:"created_at,omitempty"`
+	Channel   ChannelNS `json:"channel,omitempty"`
+	CreatedAt string    `json:"created_at,omitempty"`
 }
 
 type UNotificationS struct {

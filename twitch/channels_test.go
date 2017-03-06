@@ -13,7 +13,7 @@ func TestChannelsVideos(t *testing.T) {
 		Offset: 1,
 	}
 
-	_, err := tc.Channels.Videos("Dansgaming", opt)
+	_, err := tc.Channels.Videos("7236692", opt) // DansGaming
 
 	if err != nil {
 		t.Errorf("error not nil: %+v", err)
@@ -28,7 +28,7 @@ func TestChannelsFollows(t *testing.T) {
 		Offset: 1,
 	}
 
-	_, err := tc.Channels.Follows("Dansgaming", opt)
+	_, err := tc.Channels.Follows("7236692", opt)
 
 	if err != nil {
 		t.Errorf("error not nil: %+v", err)
@@ -38,7 +38,7 @@ func TestChannelsFollows(t *testing.T) {
 func TestChannelsChannel(t *testing.T) {
 	tc := NewClient(&http.Client{})
 
-	_, err := tc.Channels.Channel("Dansgaming")
+	_, err := tc.Channels.Channel("7236692")
 
 	if err != nil {
 		t.Errorf("error not nil: %+v", err)

@@ -2,8 +2,45 @@ package twitch
 
 import "time"
 
-// Channel object
+// Note: Twitch API v5 handles IDs inconsistently, e.g. channels/7236692 returns _id as a string,
+// but
+
+// Channel object - String ID
 type ChannelS struct {
+	Name                         string        `json:"name,omitempty"`
+	Status                       string        `json:"status,omitempty"`
+	Game                         string        `json:"game,omitempty"`
+	Delay                        int           `json:"delay,omitempty"`
+	Id                           string        `json:"_id,omitempty"`
+	CreatedAt                    string        `json:"created_at,omitempty"`
+	UpdatedAt                    string        `json:"updated_at,omitempty"`
+	PrimaryTeamName              string        `json:"primary_team_name,omitempty"`
+	PrimaryTeamDisplayName       string        `json:"primary_team_display_name,omitempty"`
+	Teams                        []TeamS       `json:"teams,omitempty"`
+	Title                        string        `json:"title,omitempty"`
+	Mature                       bool          `json:"mature,omitempty"`
+	AbuseReported                bool          `json:"abuse_reported,omitempty"`
+	Banner                       string        `json:"banner,omitempty"`
+	VideoBanner                  string        `json:"video_banner,omitempty"`
+	Views                        int           `json:"views,omitempty"`
+	Followers                    int           `json:"followers,omitempty"`
+	Background                   string        `json:"background,omitempty"`
+	ProfileBanner                string        `json:"profile_banner,omitempty"`
+	ProfileBannerBackgroundColor string        `json:"profile_banner_background_color,omitempty"`
+	Links                        ChannelLinksS `json:"_links,omitempty"`
+	Logo                         string        `json:"logo,omitempty"`
+	Url                          string        `json:"url,omitempty"`
+	DisplayName                  string        `json:"display_name,omitempty"`
+	Language                     string        `json:"language,omitempty"`
+	BroadcasterLanguage          string        `json:"broadcaster_language,omitempty"`
+	// authenticated
+	StreamKey string `json:"stream_key,omitempty"`
+	Login     string `json:"login,omitempty"`
+	Email     string `json:"email,omitempty"`
+}
+
+// Channel object - Number ID
+type ChannelNS struct {
 	Name                         string        `json:"name,omitempty"`
 	Status                       string        `json:"status,omitempty"`
 	Game                         string        `json:"game,omitempty"`
@@ -49,20 +86,29 @@ type TeamS struct {
 	UpdatedAt   string `json:"updated_at,omitempty"`
 }
 
-// Stream oject
+// Stream oject - ID as string
 type StreamS struct {
-	Id      int      `json:"_id,omitempty"`
+	Id      string   `json:"_id,omitempty"`
 	Game    string   `json:"game,omitempty"`
 	Preview PreviewS `json:"preview,omitempty"`
 	Viewers int      `json:"viewers,omitempty"`
 	Channel ChannelS `json:"channel,omitempty"`
 }
 
+// Stream oject - ID as number
+type StreamNS struct {
+	Id      int       `json:"_id,omitempty"`
+	Game    string    `json:"game,omitempty"`
+	Preview PreviewS  `json:"preview,omitempty"`
+	Viewers int       `json:"viewers,omitempty"`
+	Channel ChannelNS `json:"channel,omitempty"`
+}
+
 // User object
 type UserS struct {
 	Name        string    `json:"name,omitempty"`
 	Logo        string    `json:"logo,omitempty"`
-	ID          int       `json:"_id,omitempty"`
+	Id          string    `json:"_id,omitempty"`
 	DisplayName string    `json:"display_name,omitempty"`
 	Type        string    `json:"type,omitempty"`
 	Bio         string    `json:"bio,omitempty"`
@@ -72,12 +118,12 @@ type UserS struct {
 
 // Video object
 type VideoS struct {
-	Title       string   `json:"title,omitempty"`
-	ID          string   `json:"_id,omitempty"`
-	Embed       string   `json:"embed,omitempty"`
+	Title string `json:"title,omitempty"`
+	Id    string `json:"_id,omitempty"`
+	// Embed       string        `json:"embed,omitempty"`
 	Url         string   `json:"url,omitempty"`
 	Views       int      `json:"views,omitempty"`
-	Preview     string   `json:"preview,omitempty"`
+	Preview     PreviewS `json:"preview,omitempty"`
 	Length      int      `json:"length,omitempty"`
 	Description string   `json:"description,omitempty"`
 	BroadcastId int      `json:"broadcast_id"`

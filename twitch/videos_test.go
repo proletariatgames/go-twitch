@@ -9,7 +9,7 @@ func TestVideosId(t *testing.T) {
 
 	tc := NewClient(&http.Client{})
 
-	_, err := tc.Videos.Id("a328087483")
+	_, err := tc.Videos.Id("v101568088")
 
 	if err != nil {
 		t.Errorf("error not nil: %+v", err)

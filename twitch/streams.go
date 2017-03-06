@@ -11,6 +11,11 @@ type SChannelS struct {
 }
 
 // used with GET /streams
+type StreamsNS struct {
+	Total   int        `json:"_total,omitempty"`
+	Streams []StreamNS `json:"streams,omitempty"`
+}
+
 type StreamsS struct {
 	Total   int       `json:"_total,omitempty"`
 	Streams []StreamS `json:"streams,omitempty"`
@@ -46,7 +51,7 @@ func (s *StreamsMethod) Channel(name string) (*SChannelS, error) {
 }
 
 // Returns a list of stream objects according to optional parameters.
-func (s *StreamsMethod) List(opt *ListOptions) (*StreamsS, error) {
+func (s *StreamsMethod) List(opt *ListOptions) (*StreamsNS, error) {
 	rel := "streams"
 
 	if opt != nil {
@@ -57,7 +62,7 @@ func (s *StreamsMethod) List(opt *ListOptions) (*StreamsS, error) {
 		rel += "?" + v.Encode()
 	}
 
-	streams := new(StreamsS)
+	streams := new(StreamsNS)
 	_, err := s.client.Get(rel, streams)
 	return streams, err
 }

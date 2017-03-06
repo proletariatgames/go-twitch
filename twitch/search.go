@@ -35,8 +35,8 @@ type SearchMethod struct {
 	client *Client
 }
 
-func (s *SearchMethod) Streams(q string, opt *ListOptions) (*StreamsS, error) {
-	rel := "search/streams?q=" + url.QueryEscape(q)
+func (s *SearchMethod) Streams(q string, opt *ListOptions) (*StreamsNS, error) {
+	rel := "search/streams?query=" + url.QueryEscape(q)
 	if opt != nil {
 		v, err := query.Values(opt)
 		if err != nil {
@@ -45,13 +45,13 @@ func (s *SearchMethod) Streams(q string, opt *ListOptions) (*StreamsS, error) {
 		rel += "&" + v.Encode()
 	}
 
-	search := new(StreamsS)
+	search := new(StreamsNS)
 	_, err := s.client.Get(rel, search)
 	return search, err
 }
 
 func (s *SearchMethod) Games(q string, opt *ListOptions) (*SGamesS, error) {
-	rel := fmt.Sprintf("search/games?q=%s&type=suggest", url.QueryEscape(q))
+	rel := fmt.Sprintf("search/games?query=%s", url.QueryEscape(q))
 	if opt != nil {
 		v, err := query.Values(opt)
 		if err != nil {

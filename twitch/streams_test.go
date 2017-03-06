@@ -8,7 +8,7 @@ import (
 func TestStreamsChannel(t *testing.T) {
 	tc := NewClient(&http.Client{})
 
-	_, err := tc.Streams.Channel("Robbaz")
+	_, err := tc.Streams.Channel("71336") // Robbaz
 
 	if err != nil {
 		t.Errorf("error not nil: %+v", err)
@@ -23,7 +23,6 @@ func TestStreamsList(t *testing.T) {
 
 	opt := &ListOptions{
 		Game:       "DayZ",
-		Channel:    "LIRIK",
 		Limit:      1,
 		Offset:     1,
 		Embeddable: &emb,
