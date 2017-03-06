@@ -1,6 +1,7 @@
 package twitch
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"io/ioutil"
@@ -108,7 +109,9 @@ func (c *Client) Get(path string, r interface{}) (*http.Response, error) {
 	}
 
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusNotModified {
-		return nil, errors.New("api error, response code: " + strconv.Itoa(resp.StatusCode))
+		errResp := new(bytes.Buffer)
+		resp.Write(errResp)
+		return nil, errors.New("api error, response code: " + strconv.Itoa(resp.StatusCode) + ", " + errResp.String())
 	}
 
 	defer resp.Body.Close()
@@ -155,7 +158,9 @@ func (c *Client) GetAPI(path string, r interface{}) (*http.Response, error) {
 	}
 
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusNotModified {
-		return nil, errors.New("api error, response code: " + strconv.Itoa(resp.StatusCode))
+		errBody := new(bytes.Buffer)
+		resp.Write(errBody)
+		return nil, errors.New("api error, response code: " + strconv.Itoa(resp.StatusCode) + ", " + errBody.String())
 	}
 
 	defer resp.Body.Close()
@@ -192,7 +197,9 @@ func (c *Client) GetUsher(path string) (string, error) {
 	}
 
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusNotModified {
-		return "", errors.New("api error, response code: " + strconv.Itoa(resp.StatusCode))
+		errBody := new(bytes.Buffer)
+		resp.Write(errBody)
+		return "", errors.New("api error, response code: " + strconv.Itoa(resp.StatusCode) + ", " + errBody.String())
 	}
 
 	defer resp.Body.Close()
