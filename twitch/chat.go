@@ -32,14 +32,6 @@ type ChatMethod struct {
 	client *Client
 }
 
-func (c *ChatMethod) Channel(name string) (*ChatLinks, error) {
-	rel := "chat/" + name
-
-	chatLinks := new(ChatLinks)
-	_, err := c.client.Get(rel, chatLinks)
-	return chatLinks, err
-}
-
 func (c *ChatMethod) Emoticons() (*EmoticonsS, error) {
 	rel := "chat/emoticons"
 
