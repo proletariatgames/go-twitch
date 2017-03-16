@@ -183,12 +183,13 @@ func (c *ChannelsMethod) M3U8(name string, opt *M3U8Options) (string, error) {
 		opt.Type = "any"
 		opt.Random = rand.Int()
 		opt.Player = "twitchweb"
-		v, err := query.Values(opt)
-		if err != nil {
-			return "", err
-		}
-		rel += "?" + v.Encode()
 	}
+
+	v, err := query.Values(opt)
+	if err != nil {
+		return "", err
+	}
+	rel += "?" + v.Encode()
 
 	return c.client.GetUsher(rel)
 }
